@@ -1,19 +1,24 @@
+import json
 import sys
-
 import clipboard
 
 
 def save_clipboard(filepath, text):
-   with open(filepath, 'w') as f:
-      f.write(text)
+    with open(filepath, 'w') as f:
+        json.dump(text, f)
 
+
+def load_clipboard(filepath):
+    with open(filepath, 'r') as f:
+        return json.load(f)
+
+
+save_clipboard("data.json", {'key': 'value'})
 
 data = clipboard.paste()
 
 if len(sys.argv) > 1:
     user_input = sys.argv[1]
-    # print(f"new_content - {new_content}")
-    # clipboard.copy(content)
     if user_input == "--help":
         print("""
         Usage:
