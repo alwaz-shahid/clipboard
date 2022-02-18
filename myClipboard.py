@@ -2,6 +2,8 @@ import json
 import sys
 import clipboard
 
+saved_data = "clipboard.json"
+
 
 def save_clipboard(filepath, text):
     with open(filepath, 'w') as f:
@@ -9,30 +11,41 @@ def save_clipboard(filepath, text):
 
 
 def load_clipboard(filepath):
-    with open(filepath, 'r') as f:
-        return json.load(f)
+    try:
+        with open(filepath, 'r') as f:
+            return json.load(f)
+    except:
+        return {}
 
-
-save_clipboard("data.json", {'key': 'value'})
-
-data = clipboard.paste()
 
 if len(sys.argv) > 1:
     user_input = sys.argv[1]
+    data = load_clipboard(saved_data)
+
     if user_input == "--help":
         print("""
-        Usage:
-        myClipboard.py [content] \n
-        commands: \n "--save" - save input"
+        Usage: myClipboard.py [content] \n
+        commands: --------- \n "--save" - save input"
         \n "--get" - get t clipboard
         """)
     elif user_input == "--save":
+        print("Your last clipboard data will be saved under clipboard.json, with a key name of your input")
+        key = input("Enter key: ")
+        data[key] = clipboard.paste()
+        save_clipboard(saved_data, data)
         print("Saving content to clipboard")
 
     elif user_input == "--get":
-        print("Getting content from clipboard")
+        key = input("Enter key: ")
+        if key in data:
+            clipboard.copy(data[key])
+            print("Getting content from clipboard")
+            print(data[key])
+        else:
+            print("Key not found")
     elif user_input == "--show":
-        print("Showing content from clipboard")
+        print("Showing all content from clipboard")
+        print(data)
 
     else:
         print("Unknown command, use --help for help")
