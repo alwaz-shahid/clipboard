@@ -1,1 +1,0 @@
-{"try1": "ste()\r\n        save_clipboard(saved_data, data)\r\n        print(\"Saving content to clipboard\")", "what2": "ste()\r\n        save_clipboard(saved_data, data)\r\n        print(\"Saving content to clipboard\")", "txt": "print(sys.argv)"}

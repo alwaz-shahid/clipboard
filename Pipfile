@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 clipboard = "*"
+numpy = "*"
 
 [dev-packages]
 autopep8 = "*"
