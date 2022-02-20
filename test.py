@@ -57,11 +57,8 @@ print(s.switch(3))
 def alternate_sols(sol=1):
     if sol == 1:
         list_of_numbers = [x for x in range(0, 101, 2)]
-
         o = np.array(list_of_numbers)
-
         print(o)
     elif sol == 2:
         o = np.arange(0, 101, 2)
-
         print(o)
